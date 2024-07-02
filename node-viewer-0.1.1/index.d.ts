@@ -37,8 +37,8 @@ declare class EventSource {
     private _listens;
 }
 
-declare class Viewport extends EventSource {
-    props: ViewportProps;
+declare class NodeViewer extends EventSource {
+    props: NodeViewerProps;
     deck: Deck | null;
     canvas: HTMLCanvasElement;
     boardLayout: BoardLayout;
@@ -55,7 +55,7 @@ declare class Viewport extends EventSource {
     presenting: boolean;
     cubeCache: Map<string, ParametricCube[]>;
     selectedVersionUriCache: string[];
-    constructor(viewportProps: ViewportProps);
+    constructor(viewportProps: NodeViewerProps);
     dispose(): void;
     onLoad(): void;
     boardIsTilted(): boolean;
@@ -169,7 +169,7 @@ type EdgeInteractionState = 'default' | 'hover' | 'focus';
 type InteractionMode = 'panning' | 'inserting' | 'picking' | 'multiselect' | 'dragging' | 'rotating' | 'resizing' | 'connecting';
 type ViewportInteractionState = 'selecting' | 'drawing' | 'dragging' | 'start-dragging' | 'connecting' | 'resizing' | null;
 declare class InteractionManager {
-    viewport: Viewport;
+    viewport: NodeViewer;
     viewportInteractionState: ViewportInteractionState;
     disableController: boolean;
     nodeSelectionColors: Record<string, [number, number, number]>;
@@ -246,7 +246,7 @@ type SelectionStyle = {
     filled?: boolean;
     stroked?: boolean;
 };
-type ViewportProps = {
+type NodeViewerProps = {
     projectNode: NodeProps;
     presenting?: boolean;
     debug?: boolean;
@@ -371,4 +371,4 @@ type ViewportProps = {
     constants?: any;
 } & Omit<DeckProps, 'views'>;
 
-export { Viewport, ViewportProps };
+export { NodeViewer, NodeViewerProps };
